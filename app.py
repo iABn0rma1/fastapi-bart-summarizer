@@ -5,7 +5,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, JSONResponse
 
 # Initialize the summarizer model
-summarizer = pipeline("summarization", model="facebook/bart-xsum-cnn")
+summarizer = pipeline("summarization", model="facebook/bart-base")
 
 # Initialize FastAPI app
 app = FastAPI()
