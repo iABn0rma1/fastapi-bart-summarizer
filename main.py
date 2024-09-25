@@ -1,9 +1,8 @@
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
 from transformers import pipeline
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, JSONResponse
-from starlette.requests import Request
 
 # Initialize the summarizer model
 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
@@ -51,4 +50,3 @@ async def summarize_article(
 
     # Return JSON response for API requests
     return JSONResponse(content={"summary": summary[0]['summary_text']})
-
