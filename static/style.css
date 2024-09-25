@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000814;
+    color: #757575;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1,
+h2 {
+    color: #1976d2;
+}
+
+form {
+    background-color: #051923;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ced4da;
+}
+
+input[type="file"],
+textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+textarea {
+    background-color: #051923;
+    color: #666;
+    resize: vertical;
+    height: 150px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #023e8a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ab7;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+p#summary-result {
+    background-color: #051923;
+    color: #dee2e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    white-space: pre-wrap;
+    text-align: justify;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+p#summary-result::before {
+    content: "Summary: ";
+    font-weight: bold;
+    color: #023e8a;
+}
+
+button:disabled {
+    background-color: #333;
+    color: #666;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+#summary-result {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+p#error-message {
+    color: red;
+    font-weight: bold;
+}

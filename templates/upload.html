@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Summarizer</title>
+    <link rel="apple-touch-icon" sizes="192x192" href="/static/favicon_io/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon_io/favicon-16x16.png">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <h1>Upload or Enter an Article to Summarize</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <label for="article-file">Upload a Text File:</label>
+        <input type="file" id="article-file" name="file" accept=".txt">
+
+        <label for="article-text">Or Enter Text Directly:</label>
+        <textarea id="article-text" name="text" rows="10" placeholder="Enter your article content here..."></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Summary:</h2>
+    <p id="summary-result"></p>
+
+    <!-- Copy button to copy the generated summary -->
+    <button id="copy-btn" onclick="copyToClipboard()" disabled>Copy Summary</button>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const summaryResult = document.getElementById('summary-result');
+        const fileInput = document.getElementById('article-file');
+        const textInput = document.getElementById('article-text');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData();
+
+            // Check if the user uploaded a file or entered text manually
+            if (fileInput.files.length > 0) {
+                formData.append("file", fileInput.files[0]);
+            } else if (textInput.value.trim()) {
+                formData.append("text", textInput.value.trim());
+            } else {
+                alert("Please upload a file or enter text.");
+                return;
+            }
+
+            const response = await fetch("/summarize", {
+                method: "POST",
+                body: formData
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                const summary = result.summary;
+
+                summaryResult.textContent = result.summary;
+                // Display the summary in the <p> tag
+                document.getElementById('summary-result').textContent = summary;
+
+                // Enable the copy button once summary is available
+                document.getElementById('copy-btn').disabled = false;
+            } else {
+                summaryResult.textContent = "Error: Unable to summarize the article.";
+                document.getElementById('copy-btn').disabled = true;
+            }
+        });
+
+        // Function to copy the summary to the clipboard
+        function copyToClipboard() {
+            const summaryText = document.getElementById('summary-result').textContent;
+            navigator.clipboard.writeText(summaryText).then(() => {
+                console.log('Summary copied to clipboard!');
+            }).catch(err => {
+                console.error('Error copying text: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>
