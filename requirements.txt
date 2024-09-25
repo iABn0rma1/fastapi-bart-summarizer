@@ -3,3 +3,4 @@ starlette==0.39.0
 transformers==4.44.2
 python-multipart==0.0.10
 uvicorn==0.30.6
+transformers==4.44.2
